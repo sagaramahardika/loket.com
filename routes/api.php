@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::group( ['prefix' => 'event'], function() {
+    Route::get('/get_info/{id}', 'EventAPIController@getInfo');
+    
     Route::post('/create', 'EventAPIController@create');
     Route::post('/ticket/create', 'EventAPIController@createTicket');
 });

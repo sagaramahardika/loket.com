@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ 
+    'uses'  => 'HomeController@index',
+    'as'    => 'home',
+]);
 
 // Login Routes
 Route::get('/login', [ 
@@ -111,4 +112,16 @@ Route::group( ['prefix' => 'member'], function() {
         ]);
     });
 
+});
+
+Route::group( ['prefix' => 'event'], function() {
+    Route::get('/{id}/buy', [ 
+        'uses'  => 'EventGuestController@buy',
+        'as'    => 'event.buy',
+    ]);
+
+    Route::post('/process', [ 
+        'uses'  => 'EventGuestController@process',
+        'as'    => 'event.process',
+    ]);
 });

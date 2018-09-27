@@ -9,6 +9,36 @@ use App\Transaction;
 
 class TransactionController extends Controller
 {
+    public function getInfo( $id ) {
+
+        try {
+            $guest = Guest::findOrFail($id);
+        } catch ( Exception $e ) {
+            return response()->json( ['message' => "There's no Transaction with id given"], 400 );
+        }
+
+        $json_data = array();
+        $tickets = array();
+
+        $json_data['id'] = $guest->id;
+        $json_data['name'] = $guest->name;
+        $json_data['email'] = $guest->email;
+        $json_data['phone_number'] = $guest->phone_number;
+
+        foreach( $guest->transactions as $transaction ) {
+            $tickets[] = array(
+                'id'            => $transaction->id,
+                'id_guest'      => $transaction->id_guest,
+                'id_ticket'     => $transaction->id_ticket,
+                'quantity'      => $transaction->quantity,
+            );
+        }
+        
+        $json_data['tickets'] = $tickets;
+
+        return response()->json( $json_data, 201 );
+    }
+
     public function purchase( Request $request ) {
 
         $this->validate($request, [

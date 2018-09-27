@@ -191,6 +191,7 @@ class EventController extends Controller
             foreach ($events as $event) {
                 $edit = route( 'event.edit', $event->id );
                 $delete =  route( 'event.delete', $event->id );
+                $manageTicket = route( 'ticket.index', $event->id );
                 $time_start = floor( $event->time_start / 60 ) . ":" . ( $event->time_start % 60 );
                 $time_end = floor( $event->time_end / 60 ) . ":" . ( $event->time_end % 60 );
 
@@ -212,6 +213,7 @@ class EventController extends Controller
                             Delete
                         </button>
                     </form>
+                    <a href='{$manageTicket}' title='Manage Ticket' class='btn btn-info'>Manage Ticket</a>
                 ";
 
                 $data[] = $nestedData;

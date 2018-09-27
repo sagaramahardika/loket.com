@@ -62,58 +62,52 @@ Route::group( ['prefix' => 'member'], function() {
             'uses'  => 'EventController@edit',
             'as'    => 'event.edit',
         ]);
+        Route::get('/{id}/ticket', [ 
+            'uses'  => 'TicketController@index',
+            'as'    => 'ticket.index',
+        ]);
+        Route::get('/{id}/ticket/create', [ 
+            'uses'  => 'TicketController@create',
+            'as'    => 'ticket.create',
+        ]);
+        Route::get('/{eventId}/ticket/edit/{ticketId}', [ 
+            'uses'  => 'TicketController@edit',
+            'as'    => 'ticket.edit',
+        ]);
 
         Route::post('/', [
             'uses'  => 'EventController@all',
             'as'    => 'event.all',
         ]);
+        Route::post('/ticket', [
+            'uses'  => 'TicketController@all',
+            'as'    => 'ticket.all',
+        ]);
         Route::post('/store', [
             'uses'  => 'EventController@store',
             'as'    => 'event.store',
+        ]);
+        Route::post('/ticket/store', [
+            'uses'  => 'TicketController@store',
+            'as'    => 'ticket.store',
         ]);
 
         Route::patch('/update/{id}', [
             'uses'  => 'EventController@update',
             'as'    => 'event.update',
         ]);
+        Route::patch('/ticket/update/{id}', [
+            'uses'  => 'TicketController@update',
+            'as'    => 'ticket.update',
+        ]);
 
         Route::delete('/delete/{id}', [
             'uses'  => 'EventController@delete',
             'as'    => 'event.delete',
         ]);
-    });
-
-    Route::group( ['prefix' => 'ticket'], function() {       
-        Route::get('/', [ 
-            'uses'  => 'TicketController@index',
-            'as'    => 'event.index',
-        ]);
-        Route::get('/create', [ 
-            'uses'  => 'TicketController@create',
-            'as'    => 'event.create',
-        ]);
-        Route::get('/edit/{id}', [ 
-            'uses'  => 'TicketController@edit',
-            'as'    => 'event.edit',
-        ]);
-
-        Route::post('/', [
-            'uses'  => 'TicketController@all',
-            'as'    => 'event.all',
-        ]);
-        Route::post('/store', [
-            'uses'  => 'TicketController@store',
-            'as'    => 'event.store',
-        ]);
-
-        Route::patch('/update/{id}', [
-            'uses'  => 'TicketController@update',
-            'as'    => 'event.update',
-        ]);
-
-        Route::delete('/delete/{id}', [
+        Route::post('/ticket/delete/{id}', [
             'uses'  => 'TicketController@delete',
-            'as'    => 'event.delete',
+            'as'    => 'ticket.delete',
         ]);
     });
 

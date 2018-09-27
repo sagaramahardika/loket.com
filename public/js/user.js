@@ -34,4 +34,28 @@ $(document).ready(function () {
         $('#time_end').datetimepicker({ format: 'HH:mm' });
     }
 
+    if ( $('table#ticket').length > 0 ) {
+        var id_event = $("#id_event").val();
+        $('#ticket').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": config.routes.user.ticket,
+                "dataType": "json",
+                "type": "POST",
+                "data": {
+                    id_event: id_event,
+                    _token: config.token
+                }
+            },
+            "columns": [
+                { "data": "name" },
+                { "data": "description" },
+                { "data": "price" },
+                { "data": "quantity" },
+                { "data": "options" },
+            ]
+        });
+    }
+
 });

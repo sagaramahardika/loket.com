@@ -19,3 +19,9 @@ Route::group( ['prefix' => 'event'], function() {
     Route::post('/create', 'EventAPIController@create');
     Route::post('/ticket/create', 'EventAPIController@createTicket');
 });
+
+Route::group( ['prefix' => 'transaction'], function() {
+    Route::get('/get_info/{id}', 'TransactionController@getInfo');
+    
+    Route::post('/purchase', 'TransactionController@purchase');
+});

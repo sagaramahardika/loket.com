@@ -70,7 +70,7 @@ class EventAPIController extends Controller
         try {
             $event = Event::findOrFail($id);
         } catch ( Exception $e ) {
-            return response()->json( ['message' => "There's no Event with id given"] );
+            return response()->json( ['message' => "There's no Event with id given"], 400 );
         }
 
         $json_data = array();

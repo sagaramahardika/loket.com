@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Ticket;
 
 class EventAPIController extends Controller
 {
@@ -40,5 +41,26 @@ class EventAPIController extends Controller
         $event->save();
 
         return response()->json( $event, 201 );
+    }
+
+    public function createTicket( Request $request ) {
+
+        $this->validate($request, [
+            'id_event'          => 'required',      
+            'name'              => 'required|string',
+            'description'       => 'required|string',
+            'price'             => 'required|numeric',
+            'quantity'          => 'required|numeric', 
+        ]);
+
+        $ticket = new Ticket();
+        $ticket->id_event = $request->input('id_event');
+        $ticket->name = $request->input('name');
+        $ticket->description = $request->input('description');
+        $ticket->price = $request->input('price');
+        $ticket->quantity = $request->input('quantity');
+        $ticket->save();
+
+        return response()->json( $ticket, 201 );
     }
 }
